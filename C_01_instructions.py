@@ -1,36 +1,54 @@
+# Check that users have entered a valid
+# option based on a list
 
-# functions go here
 
-def yes_no(question):
-
-    """Checks user response to a question is yes / no (y/n), returns 'yes' or 'no' """
+def string_checker(question, valid_ans=("yes", "no")):
+    error = f"Please enter a valid option from the following list: {valid_ans}"
 
     while True:
-        response = input(question).lower()
 
-        # check the user says yes / no
-        if response == "yes" or response == "y":
-            return "yes"
-        elif response == "no" or response == "n":
-            return "no"
-        else:
-            print("Please enter yes / no")
+        user_response = input(question).lower()
 
-def instructions():
-    print("""
-*** Instructions ***
-    
-Roll the dice and try to win!
-    """)
+        for item in valid_ans:
+            # check if the user response is a word in the list
+            if item == user_response:
+                return item
+            # check if the user response is the same as
+            # the first letter of an item in the list
+            elif user_response == item[0]:
+                return item
+
+        # print error if user does not enter something that is valid
+        print(error)
+        print()
+
+def instruction():
+    print('''
+
+**** Instructions ****
+
+There are 3 options you can choose, rock, paper, and scissors.
+Each option has something it beats, and something that beats it,
+the only thing that cannot beat it is itself.
+
+-	Remember that…
+    o	Paper beats rock
+    o	Rock beats scissors
+    o	Scissors beats paper
+
+    ''')
+
 
 # Main routine
-
-# Ask the user if they want instructions (checks they say yes / no)
-want_instructions = yes_no("Do you want to see the instructions? ")
-
-# Displays the instructions if the user wants to see them
-if want_instructions == "yes":
-    instructions()
-
 print()
+print("💎📰✂️ Rock Paper Scissors ✂️📰💎")
+print()
+
+# Loop for testing purposes
+want_instructions = string_checker("Do you want to read the instructions?")
+
+# Checks users enter yes (y) or no (n)
+if want_instructions == "yes":
+    instruction()
+
 print("Program continues")
