@@ -1,6 +1,3 @@
-from C_02_String_checker_v3 import user_choice
-
-
 def int_check(question):
 
     while True:
